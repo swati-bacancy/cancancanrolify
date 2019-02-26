@@ -1,0 +1,11 @@
+<h1><%= current_user.roles.first.name %></h1>
+
+<ul>
+  <li><%= link_to 'create company user', new_manage_user_path(@user) %></li>
+  <li><%= link_to 'company user index', manage_users_path %></li>
+  <li><%= link_to 'product Lits', products_path %></li>
+
+  <!-- <li><a href="#contact">Contact</a></li>
+  <li><a href="#about">About</a></li> -->
+  <li><%= link_to 'logout', destroy_user_session_path, method: :delete%></li>
+</ul>
