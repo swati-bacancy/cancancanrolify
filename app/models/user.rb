@@ -8,7 +8,6 @@ class User < ApplicationRecord
   after_create :assign_default_role
 
    def assign_default_role
-     binding.pry
-     self.add_role(:user) if self.roles.blank?
+     self.add_role(:customer) if self.roles.blank?
    end
 end

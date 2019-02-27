@@ -8,7 +8,7 @@ class ManageUsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       if !@user.roles.blank?
-        @user.remove_role :user
+        @user.remove_role :customer
         @user.add_role :admin
       end
       redirect_to manage_users_path

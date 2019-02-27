@@ -1,11 +1,16 @@
-<h1><%= current_user.roles.first.name %></h1>
+<% if current_user %>
+  <h1><%= current_user && current_user.roles.first.name %></h1>
 
-<ul>
-  <li><%= link_to 'create company user', new_manage_user_path(@user) %></li>
-  <li><%= link_to 'company user index', manage_users_path %></li>
-  <li><%= link_to 'product Lits', products_path %></li>
+  <ul>
+    <% if can? :read, User %>
+      <li><%= link_to 'company users', manage_users_path %></li>
+    <% end %>
+    <% if can? :read, Product %>
+      <li><%= link_to 'product Lits', products_path %></li>
+    <% end %>
 
-  <!-- <li><a href="#contact">Contact</a></li>
-  <li><a href="#about">About</a></li> -->
-  <li><%= link_to 'logout', destroy_user_session_path, method: :delete%></li>
-</ul>
+    <!-- <li><a href="#contact">Contact</a></li>
+    <li><a href="#about">About</a></li> -->
+    <li><%= link_to 'logout', destroy_user_session_path, method: :delete%></li>
+  </ul>
+<% end %>

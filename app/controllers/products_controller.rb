@@ -1,12 +1,16 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!
   before_action :find_product, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
+
   def new
     @product = Product.new
+    # authorize! :create, @product
   end
 
   def create
     @product = current_user.products.build(product_params)
+    # authorize! :create, @product
     if @product.save
       redirect_to products_path
     else
@@ -15,6 +19,7 @@ class ProductsController < ApplicationController
   end
 
   def update
+    # authorize! :update, @product
     if @product.update(product_params)
       redirect_to products_path
     else
@@ -24,9 +29,11 @@ class ProductsController < ApplicationController
 
   def index
     @products = Product.all
+    # authorize! :index, @products
   end
 
   def destroy
+    # authorize! :destroy, @product
     @product.destroy
     redirect_to products_path
   end
